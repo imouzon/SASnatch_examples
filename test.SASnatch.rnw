@@ -1,0 +1,60 @@
+% For LaTeX-Box: root = test.SASnatch.3.tex 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  File Name: test.SASnatch.3.rnw
+%  Purpose: Provide a simple illustration of SASnatch
+%
+%  Creation Date: 25-04-2014
+%  Last Modified: Sun Apr 27 16:28:16 2014
+%  Created By:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}
+\begin{document}
+\section{Using SASnatch}
+\subsection{Installation}
+
+SASnatch is available on github and can be installed using the \verb!devtools! in R:
+<<ff-packages, cache=FALSE, message=FALSE, eval = FALSE, include = TRUE>>=
+   require('devtools')
+   install_github('SASnatch','imouzon')
+@
+
+\subsection{Setting up a .rnw file}
+SASnatch requires knitr to run
+<<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
+   require('knitr')
+   require('SASnatch')
+@
+and the following set in any chunk before the first SASnatch chunk:
+<<SASnatch-settings, cache=FALSE, message=FALSE, include = TRUE>>=
+   path_to_SAS.EXE <<- '"C:/Program Files/SAS/SASFoundation/9.2/sas.exe"'
+   knit_hooks$set(SASnatch = SASnatch_hook)
+@
+where \verb!path_to_SAS.EXE! is the full path to the version of SAS installed on your machine.
+At this point you are ready to use SASnatch.
+\section{A brief example}
+Consider the following dataset:
+<<setupChunk, echo=TRUE, cache=TRUE, include = TRUE>>=
+   d.1 <- data.frame(x=1:100,y=.3+.2*(1:100)+rnorm(100,0,3),group=rep('A',100))
+   d.2 <- data.frame(x=1:100,y=.1+.5*(1:100)+rnorm(100,0,3),group=rep('B',100))
+   d <- rbind(d.1,d.2)
+@
+
+We can plot these datasets simply enough:
+%-- plotchunk: R plot (results in document)
+%<<plotchunk, fig.width=5, fig.height=5, out.width='.5\maxwidth', echo=TRUE>>=
+%   require(ggplot2)
+%   qplot(x,y,data = d,shape=group)
+%@
+
+Which can be run in SAS using the following:
+%-- SASgroupreg: R code (Code in Document)
+<<SASgroupreg, SASnatch = c('d','regd_out'), eval=FALSE, echo=FALSE, cache=FALSE>>=
+   proc reg data = d; 
+     by group; 
+      model y = x; 
+      output out = regd_out p = yhat r = resid;
+   run;
+@
+\end{document}
+
+
