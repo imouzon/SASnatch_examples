@@ -3,7 +3,7 @@
 #  Purpose:
 #
 #  Creation Date: 06-02-2014
-#  Last Modified: Mon Apr 28 13:01:40 2014
+#  Last Modified: Mon Apr 28 13:03:26 2014
 #  Created By:
 #
 #--------------------------------------**--------------------------------------#
@@ -17,9 +17,7 @@
       if(rootDir == FALSE) rootDir <- getwd()
 
       #store figures in the fig folder, prefix with 'graphics-'
-      fig.folder = paste(rootDir,'/fig/',sep='')
-      fig.prefix = paste('fig_',format(Sys.time(),'%m-%d'),sep='')
-      fig.path = paste(fig.folder,fig.prefix,'_',sep='')
+      fig.path = paste(rootDir,'/fig/',sep='')
 
       #cahced output stored in cache.path
       cache.path = paste(rootDir,'/out/cache/',sep='')
@@ -34,8 +32,6 @@
          fig.pos = 'h',
          fig.show='hold', 
          tidy=TRUE,
-         par=TRUE
-      )
-
+         par=TRUE)
    }
    knitrSetup()
