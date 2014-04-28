@@ -4,14 +4,14 @@
 %  Purpose:
 %
 %  Creation Date: 28-04-2014
-%  Last Modified: Mon Apr 28 02:14:26 2014
+%  Last Modified: Mon Apr 28 13:01:44 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-- Set parent file
 <<set-parent, echo=FALSE, cache=FALSE, include = TRUE>>=
    #set up knitr
    source('knitrSetup.r')
-   knitrSetup(rootDir=FALSE,use.tikz=TRUE)
+   knitrSetup(rootDir='U:/Desktop/SASnatch_examples/salinity')
 
    #set up file locations
    file.directory = getwd()
@@ -70,88 +70,20 @@ replace
 \end{verbatim}
 with
 %-- procPlot: R plot (results in document)
-<<procPlot, fig.width=5, fig.height=5, out.width='.5\maxwidth', echo=TRUE>>=
+<<procPlot, fig.width=5, fig.height=5, echo=TRUE>>=
    qplot(trt,weight,color=factor(container),data=salinity,main='Barley response to salinity')
 @
 We would now like to fix a mixed model with container as a random effect. This 
 could be done using SAS. Since we want to get output back from SASnatch, we need to 
 add an output statement:
 %-- SASmixed: R code (Code in Document)
-<<SASmixed, eval=FALSE, echo=TRUE, cache=FALSE, include = TRUE>>=
-   proc mixed method = type3; class trt container; model weight = trt; random container(trt); lsmeans trt; run;
+<<SASmixed, SASnatch = c('salinity',''), eval=FALSE, echo=TRUE, cache=FALSE, include = TRUE>>=
+   proc mixed method = type3 data = salinity; class trt container; model weight = trt; random container(trt); lsmeans trt; run;
 @
 
 which gives us the following:
 %-- Rmixed: R code (Code in Document)
 <<Rmixed, echo=TRUE, cache=TRUE, include = TRUE>>=
-   SASmixed.res@results@R
+   SASmixed.res@results@R[[1]][[1]]
 @
 
-
-%  title 'ANOVA estimates of variance components, using proc mixed';
-%run;
-%
-%/* stuff below here demonstrates three points */            
-%proc mixed method = type3;
-%  class trt container plant;
-%
-%  model weight = trt;
-%  random container(trt) plant(container*trt);
-%  title '1) Specifying three levels of variability';
-%run;
-%     
-%proc mixed;
-%  class trt container;
-%  
-%  model weight = trt;
-%  random container(trt);
-%  lsmeans trt;
-%  
-%  title '2) REML estimates of variance components, using proc mixed';
-%/* To get REML estimates, remove the method = type3 from the */
-%/*   proc mixed statement */
-%run;
-%  
-%/* illustration that test of trt effects and se of diff */
-%/*   as as '401' approach of averaging plants within container */  
-%proc sort data = salinity;
-%  by trt  container;
-%       
-%proc means noprint;
-%  by trt container;
-%  var weight;
-%  output out = means mean = wtmean;
-%run;
-%  
-%proc print;
-%  title 'Container means';
-%run;
-%        
-%proc glm;
-%  class trt;
-%  model wtmean = trt;
-%  lsmeans trt;
-%  title '3) GLM on container means';
-%  
-%run;
-%        
-%/* syntax where do not have treatments, only samples and subsamples */
-%data salinity1;
-%  set salinity;
-%  
-%  if trt = 'l';
-%/* keep only the low salinity values */
-%
-%proc mixed method = type3;
-%  class container;
-%  model weight =  ;
-%  random container;
-%  estimate 'mean' intercept 1;
-%  
-%run;
-%     
-%
-%        
-%
-%     
-%   
