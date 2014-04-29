@@ -80,7 +80,69 @@ add an output statement:
 which gives us the following:
 %-- Rmixed: R code (Code in Document)
 
+\begin{verbatim}
+\Sexpr{SASmixed.snatch@code}
+\end{verbatim}
+
 <<Rmixed, results='asis',echo=TRUE, cache=TRUE, include = TRUE>>=
    printSASnatch(SASmixed.snatch,type='TeX')
 @
+
+%-- SASmixed: R code (Code in Document)
+<<SASmixed2, SASnatch = c('salinity','salinity'), eval=FALSE, echo=FALSE, cache=FALSE, include = TRUE>>=
+   proc mixed method = type3; class trt container; model weight = trt; random container(trt); lsmeans trt; run;
+@
+
+which gives us the following:
+
+\begin{verbatim}
+\Sexpr{SASmixed2.snatch@code}
+\end{verbatim}
+%-- Rmixed: R code (Code in Document)
+<<Rmixed2, echo=TRUE, cache=TRUE, include = TRUE>>=
+   printSASnatch(SASmixed2.snatch,type='TeX')
+@
+  
+We know that to get the REML estimates we must remove \verb!method = type3! from the results:
+<<SASmixed3, SASnatch = c('salinity','salinity'), eval=FALSE, echo=FALSE, cache=FALSE, include = TRUE>>=
+   proc mixed method = type3; class trt container plant; model weight = trt; random container(trt) plant(container*trt); title '1) Specifying three levels of variability'; run; 
+@
+  
+\begin{verbatim}
+\Sexpr{SASmixed3.snatch@code}
+\end{verbatim}
+
+%-- Rmixed: R code (Code in Document)
+<<Rmixed3, echo=TRUE, cache=TRUE, include = TRUE>>=
+   printSASnatch(SASmixed3.snatch,type='TeX')
+@
+
+<<SASmixed4, SASnatch = c('salinity','salinity'), eval=FALSE, echo=FALSE, cache=FALSE, include = TRUE>>=
+proc mixed; class trt container; model weight = trt; random container(trt); lsmeans trt; run;
+@
+  
+\begin{verbatim}
+\Sexpr{SASmixed4.snatch@code}
+\end{verbatim}
+
+<<Rmixed4, echo=TRUE, cache=TRUE, include = TRUE>>=
+   printSASnatch(SASmixed4.snatch,type='TeX')
+@
+
+\begin{verbatim}
+\Sexpr{SASmixed4.snatch@code}
+\end{verbatim}
+
+<<SASmixed5, SASnatch = c('salinity','salinity'), eval=FALSE, echo=FALSE, cache=FALSE, include = TRUE>>=
+proc sort data = salinity; by trt  container; proc means noprint; by trt container; var weight; output out = means mean = wtmean; run; proc print; title 'Container means'; run; proc glm; class trt; model wtmean = trt; lsmeans trt; title '3) GLM on container means'; run; /* syntax where do not have treatments, only samples and subsamples */ data salinity1; set salinity; if trt = 'l'; /* keep only the low salinity values */ proc mixed method = type3; class container; model weight =  ; random container; estimate 'mean' intercept 1; run;
+@
+     
+\begin{verbatim}
+\Sexpr{SASmixed5.snatch@code}
+\end{verbatim}
+
+<<Rmixed5, echo=TRUE, cache=TRUE, include = TRUE>>=
+   printSASnatch(SASmixed5.snatch,type='TeX')
+@
+
 \end{document}

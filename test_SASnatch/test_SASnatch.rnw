@@ -1,13 +1,13 @@
-% For LaTeX-Box: root = test.SASnatch.3.tex 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  File Name: test.SASnatch.3.rnw
 %  Purpose: Provide a simple illustration of SASnatch
 %
 %  Creation Date: 25-04-2014
-%  Last Modified: Mon Apr 28 14:27:49 2014
+%  Last Modified: Tue Apr 29 10:12:55 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[10pt]{article}
+\usepackage{longtable}
 \begin{document}
 \section{Using SASnatch}
 \subsection{Installation}
@@ -15,7 +15,7 @@
 SASnatch is available on github and can be installed using the \verb!devtools! in R:
 <<ff-packages, cache=FALSE, message=FALSE, eval = FALSE, include = TRUE>>=
    require('devtools')
-   install_github('SASnatch','imouzon')
+   install_github('SASnatch','imouzon',arg='-l U://Documents/R/win-library/3.0')
 @
 
 \subsection{Setting up a .rnw file}
@@ -23,13 +23,17 @@ SASnatch requires knitr to run
 <<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
    require('knitr')
    require('SASnatch')
+   require('XML')
+   require('xtable')
 @
 and the following set in any chunk before the first SASnatch chunk:
-<<SASnatch-settings, cache=FALSE, message=FALSE, include = TRUE>>=
-   path_to_SAS.EXE <<- '"C:/Program Files/SAS/SASFoundation/9.2/sas.exe"'
+<<SASnatchsettings, cache=FALSE, message=FALSE, include = TRUE>>=
+   setwd('U:/Desktop/SASnatch_ex/test/')
+   path_to_SAS.EXE <- '"C:/Program Files/SASHome/SASFoundation/9.3/sas.exe"'
    knit_hooks$set(SASnatch = SASnatch_hook)
 @
 where \verb!path_to_SAS.EXE! is the full path to the version of SAS installed on your machine.
+The hook \verb!SASnatch = SASnatch_hook! allows for SASnatch to work as a hook option.
 At this point you are ready to use SASnatch.
 \section{A brief example}
 Consider the following dataset:
@@ -40,21 +44,31 @@ Consider the following dataset:
 @
 
 We can plot these datasets simply enough:
-%-- plotchunk: R plot (results in document)
-%<<plotchunk, fig.width=5, fig.height=5, out.width='.5\maxwidth', echo=TRUE>>=
-%   require(ggplot2)
-%   qplot(x,y,data = d,shape=group)
-%@
+-- plotchunk: R plot (results in document)
+<<plotchunk, fig.width=5, fig.height=5, out.width='.5\\maxwidth', echo=TRUE>>=
+   require(ggplot2)
+   qplot(x,y,data = d,shape=group)
+@
 
 Which can be run in SAS using the following:
 %-- SASgroupreg: R code (Code in Document)
 <<SASgroupreg, SASnatch = c('d','regd_out'), eval=FALSE, echo=FALSE, cache=FALSE>>=
-   proc reg data = d; 
-     by group; 
-      model y = x; 
-      output out = regd_out p = yhat r = resid;
-   run;
+   proc reg data = d; by group; model y = x; output out = regd_out p = yhat r = resid;   run;
+@
+
+we can now insert the LaTeX results:
+<<resultsR,results='asis'>>=
+printSASnatch(SASgroupreg.snatch,type='TeX')
+@
+
+and since we requested regd\_out be returned to R we can now plot the residuals against the predicted:
+%-- errors: R code (Code in Document)
+<<errors, echo=TRUE, cache=TRUE, include = TRUE>>=
+  regd_out = SASgroupreg.snatch@out@SAS2R$regd_out
+  head(regd_out)
+@
+%-- residPlot: R plot (results in document)
+<<residPlot, fig.width=5, fig.height=5, out.width='.5\\maxwidth', echo=TRUE>>=
+   qplot(yhat,resid,data=regd_out)
 @
 \end{document}
-
-
