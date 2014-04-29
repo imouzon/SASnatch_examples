@@ -2,8 +2,8 @@
 #  File Name:
 #  Purpose:
 #
-#  Creation Date: 26-04-2014
-#  Last Modified: Sat Apr 26 19:52:12 2014
+#  Creation Date: 29-04-2014
+#  Last Modified: Tue Apr 29 10:40:10 2014
 #  Created By:
 #
 #--------------------------------------**--------------------------------------#
@@ -13,11 +13,8 @@
 #  .Fortran("subroutine name",as.integer(input1),as.double(input2), etc)
 #
 
+#check to see if folders are being created for output
+setwd('~/courses/stat585/SASnatch_examples/fake_projects/')
+system('rm -rf ./fake_project3')
+system('mkdir ./fake_project3')
 
-place <- "\\\\iastate.edu/cyfiles/hofmann/Documents/R/win-library/3.0"
-if(grep('iastate.edu',place)){
-   place <- 
-      unlist(strsplit(place,'/'))
-   place <- paste('U:',paste(place[4:length(place)],collapse='/'),sep='/')
-}
-place

@@ -3,7 +3,7 @@
 %  Purpose: Provide a simple illustration of SASnatch
 %
 %  Creation Date: 25-04-2014
-%  Last Modified: Tue Apr 29 10:12:55 2014
+%  Last Modified: Tue Apr 29 10:57:18 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[10pt]{article}
@@ -21,10 +21,8 @@ SASnatch is available on github and can be installed using the \verb!devtools! i
 \subsection{Setting up a .rnw file}
 SASnatch requires knitr to run
 <<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
-   require('knitr')
    require('SASnatch')
-   require('XML')
-   require('xtable')
+   require('ggplot2')
 @
 and the following set in any chunk before the first SASnatch chunk:
 <<SASnatchsettings, cache=FALSE, message=FALSE, include = TRUE>>=
