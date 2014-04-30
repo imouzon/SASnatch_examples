@@ -168,10 +168,10 @@
 
 %title information
 \title[SASnatch]{SASnatch: Using SAS Naturally}
-\subtitle{(or knitrally)}
-\subtitle{\smaller{(or snatchurally)}}
+\subtitle{(or knitrally) \\
+\smaller{(or snatchurally)}}
 \author[Mouzon]{Ian Mouzon}
-\institute[Stats@ISU]{Department of Statistics\\Iowa State University }
+\institute[Stats@ISU]{STAT 585 Presentation\\Spring 2014}
 \date[Apr 30, 2014]{April 30, 2014}
 
 
@@ -183,7 +183,7 @@
 %  Purpose:
 %
 %  Creation Date: 29-04-2014
-%  Last Modified: Wed Apr 30 13:41:33 2014
+%  Last Modified: Wed Apr 30 14:39:10 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-- Set parent file
@@ -219,7 +219,8 @@ SAS is one of the following
 
 \begin{frame}
    \frametitle{SAS: It's actually really good}
-   \framesubtitle{It's better than you remember}
+   \framesubtitle{It's better than you remember and does more than you knew}
+   \centerline{\includegraphics[scale=.01]{SASlogo.jpg}}\\
    \begin{itemize}
       \item SAS code that works now will still work years from now and SAS
          code that ran years ago will still run today 
@@ -283,46 +284,69 @@ SAS is one of the following
    Most of my complaints about SAS have to do with the way it fails to work like knitr.
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
    \frametitle{SASnatch: Using SAS in a more natural way}
 
    SASnatch is a package that aims to do more the following:
    \begin{itemize}
-      \item Bridge the gap between SAS code and reproducible, manipulatable output
+      \item Bridge the gap between SAS code and reproducible, manipulatable output \\
+
       \item Allow the programmer to use which tool they prefer at that moment, be
          it is SAS or R
    \end{itemize}
 
-   It does this through knitr. I will show you how this works.
+   It does this through \verb!knitr!. I will show you how this works.
 \end{frame}
 
 \begin{frame}
-   \frametitle{SASnatch: Using SAS in a more natural way}
+   \frametitle{SASnatch: The Power to Snatch}
 
-   SASnatch is a package that aims to do more the following:
+   SASnatch is a package that aims to do the following:
    \begin{itemize}
-      \item Bridge the gap between SAS code and reproducible, manipulatable output
-      \item Allow the programmer to use which tool they prefer at that moment, be
-         it is SAS or R
+      \item Transfer data between SAS and R with \emph{minimal} effort,
+      \item Eliminate clicking around SAS, and
+      \item Manage SAS's output in a convenient way
+   \end{itemize}
+   Which will hopefully
+   \begin{itemize}
+      \item Allow the programmer to use which tool he or she prefers at that moment, be it is SAS or R
+      \item Make SAS more accessible to R users
    \end{itemize}
 
-   It does this through knitr. I will show you how this works.
+   It does this through knitr (generally). I will show you how this works.
 \end{frame}
 
 \begin{frame}[fragile]
-   \frametitle{Installation}
-
-   SASnatch is available on github at: \vspace{.3cm}
-
-   \verb! https://github.com/imouzon/SASnatch! \vspace{.4cm} \\
-
+   \frametitle{Next steps punchlist}
+   \framesubtitle{Originally "easy, medium, and hard"}
+   R:
    \begin{itemize}
-      \item in R it can be installed on \verb!ts3! using 
+      \item Incorporate SAS's log file into the inline call (i.e., \verb!cat(log.file)!)
+      \item Improve "chunk" behavior (the code should print, but must use \verb!eval = FALSE! ...)
    \end{itemize}
+   \LaTeX:
+   \begin{itemize}
+      \item Syntax highlighting the SAS code in the output document (\LaTeX packages can do this, but using them with knitr is tricky)
+      \item Using the SAS's higher level \LaTeX output (which would require accessing and using SAS's "style sheets")
+   \end{itemize}
+   SAS:
+   \begin{itemize}
+      \item Syntax highlighting while programming (VIM can kind of do this)
+      \item Improve data management using databases (SAS and R can both read and write from SQLite - but it's not on the terminals)
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Questions?}
+
+   \centerline{\LARGE{Thank you for listening!}} \vspace{2cm}
+
+   SASnatch on github at: \verb!github.com/imouzon/SASnatch! \vspace{.4cm} \\
+
+   Installation: \\
    \verb!    >library(devtools)!
    \verb!    >install_github('SASnatch','imouzon',!
    \verb!                    arg='-l U://Documents/R/win-library/3.0')!
-   \vspace{.4cm} \\
 
 \end{frame}
 \end{document}

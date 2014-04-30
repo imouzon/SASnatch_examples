@@ -3,7 +3,7 @@
 %  Purpose:
 %
 %  Creation Date: 08-12-2012
-%  Last Modified: Tue Apr 29 20:40:59 2014
+%  Last Modified: Wed Apr 30 14:03:36 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,10 +122,10 @@
 
 %title information
 \title[SASnatch]{SASnatch: Using SAS Naturally}
-\subtitle{(or knitrally)}
-\subtitle{\smaller{(or snatchurally)}}
+\subtitle{(or knitrally) \\
+\smaller{(or snatchurally)}}
 \author[Mouzon]{Ian Mouzon}
-\institute[Stats@ISU]{Department of Statistics\\Iowa State University }
+\institute[Stats@ISU]{STAT 585 Presentation\\Spring 2014}
 \date[Apr 30, 2014]{April 30, 2014}
 
 \begin{document}

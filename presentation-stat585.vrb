@@ -1,14 +1,11 @@
-\frametitle{Installation}
+\frametitle{Questions?}
 
-   SASnatch is available on github at: \vspace{.3cm}
+   \centerline{\LARGE{Thank you for listening!}} \vspace{2cm}
 
-   \verb! https://github.com/imouzon/SASnatch! \vspace{.4cm} \\
+   SASnatch on github at: \verb!github.com/imouzon/SASnatch! \vspace{.4cm} \\
 
-   \begin{itemize}
-      \item in R it can be installed on \verb!ts3! using
-   \end{itemize}
+   Installation: \\
    \verb!    >library(devtools)!
    \verb!    >install_github('SASnatch','imouzon',!
    \verb!                    arg='-l U://Documents/R/win-library/3.0')!
-   \vspace{.4cm} \\
 
