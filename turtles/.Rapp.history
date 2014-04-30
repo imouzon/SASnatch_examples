@@ -1,0 +1,250 @@
+SAS.IMPORT.CODE.TEMPLATE <<- 'PROC IMPORT DATAFILE = "SASCACHE/DATASET_TO_GIVE_TO_SAS.R2SASfilet" out = DATASET_TO_GIVE_TO_SAS dbms = R2SASdbms replace; getnames = yes; run;'
+SAS.IMPORT.CODE.TEMPLATE <<- gsub('SASCACHE',SAScache.directory,SAS.IMPORT.CODE.TEMPLATE)
+SAS.IMPORT.CODE.TEMPLATE <<- gsub('SASnatch-chunk-name',chunk.name,SAS.IMPORT.CODE.TEMPLATE)
+SAS.IMPORT.CODE.TEMPLATE <<- gsub('R2SASfilet',R2SASfilet,SAS.IMPORT.CODE.TEMPLATE)
+SAS.IMPORT.CODE.TEMPLATE <<- gsub('R2SASdbms',R2SASdbms,SAS.IMPORT.CODE.TEMPLATE)
+R2SAS <<- unique(unlist(strsplit(gsub('\\s*,\\s*',' ',R2SAS),' ')))
+unique(unlist(strsplit(gsub('\\s*,\\s*',' ',R2SAS),' ')))
+R2SAS = unique(unlist(strsplit(gsub('\\s*,\\s*',' ',R2SAS),' ')))
+if(R2SAS[1] == ''){
+SAS.IMPORT.CODE <<- ''
+SAS.IMPORT.CODE <<- sapply(1:length(R2SAS), function(i) gsub('DATASET_TO_GIVE_TO_SAS',R2SAS[i],SAS.IMPORT.CODE.TEMPLATE))
+SAS.IMPORT.CODE
+!(SASnatch.working.directory == '')
+class(makeSAScache(SASnatch.working.directory = SAScache.directory))
+SAScache.directory = '~/courses/stat585/SASnatch_examples/fake_project2'
+SAScache.directory
+SASnatch.R.cache.folder
+SAScache.directory = '~/courses/stat585/SASnatch_examples/fake_project2/SAScache'
+file.path(SASnatch.R.cache.parent,SASnatch.R.cache.folder)
+SASnatch.SAScache.parent
+SAScache.directory = '~/courses/stat585/SASnatch_examples/fake_project2/cache'
+SASnatch:::makeSAScache(SASnatch.working.directory = SAScache.directory)
+SASnatch_hook = function(before, options, envir){
+SAScache.directory <-
+makeSAScache(SASnatch.working.directory = SAScache.directory)
+SASnatch.dsn = c('d1, d2','d3')
+SASnatch.working.directory = '~/courses/stat585/SASnatch_examples/fake_project2'
+SAScache.directory = '~/courses/stat585/SASnatch_examples/fake_project2/'
+chunk.name = 'SASregs'
+code = 'proc reg data = d; model y = x; out = dsnout p = yhat; run;'
+SAScache.directory <- makeSAScache(SASnatch.working.directory = SAScache.directory)
+SAScode
+cat(SAScode)
+w
+SASnatch.working.directory='~/courses/stat585/SASnatch_examples/fake_project2/'
+SASnatch.R.cache.path = paste(SASnatch.working.directory,'cache',sep='/')
+SASnatch.R.cache.path = paste(getwd(),'cache',sep='/')
+SASnatch.R.cache.path = paste(SASnatch.working.directory,'cache',sep='')
+SASnatch.R.cache.path = paste(getwd(),'cache',sep='')
+SASnatch.R.cache.parent
+SASnatch.SAScache.parent = SASnatch.R.cache.parent
+SASnatch.SAScache.parent = SASnatch.R.cache.path
+paste(SASnatch.SAScache.parent,'SAScache',sep='/')
+SASnatch.SAScache.path = paste(SASnatch.SAScache.parent,'SAScache',sep='/')
+SASnatch.SAScache.folder = 'SAScache'
+SASnatch.SAScache.folder
+message.1 = paste("Creating folder '",SASnatch.R.cache.folder[1],"' in directory",SAScache.R.cache.parent,sep='')
+;w
+?file.path
+?expand.path
+?dir.create
+SASnatch.R.cache.path = file.path(SASnatch.working.directory,'cache')
+SASnatch.R.cache.path = path.expand(SASnatch.R.cache.path)
+message.1 = paste("Creating folder '",SASnatch.R.cache.folder[1],"' in directory",SASnatch.R.cache.parent,sep='')
+SAScache.beside.Rcache = TRUE
+SASnatch.SAScache.parent <- SASnatch.R.cache.parent
+SASnatch.SAScache.parent <- SASnatch.R.cache.path
+SASnatch.SAScache.path <- file.path(SASnatch.SAScache.parent,'SAScache')
+message.2 = paste("Creating folder 'SAScache' in directory",SASnatch.R.cache.parent)
+dir.create(file.path(SASnatch.SAScache.parent,'SAScache'))
+makeSAScache(SASnatch.working.directory='~/courses/stat585/SASnatch_examples/fake_project2')
+rm(list=ls)
+require('knitr')
+require('SASnatch')
+makeSAScache()
+message('SASnatch.working.directory not set in chunk')
+message('Setting SASnatch.R.cache.path to knitr cache path')
+message('Setting SASnatch.R.cache.path to working directory')
+cat('SASnatch.working.directory not set in chunk')
+cat('Setting SASnatch.R.cache.path to knitr cache path')
+cat('Setting SASnatch.R.cache.path to working directory')
+rm(list = ls())
+if(!(SASnatch.working.directory=='')){
+SASnatch.working.directory
+SASnatch.working.directory != ''
+if(SASnatch.working.directory == ''){
+if(SASnatch.R.cache.path == 'cache/'){
+message.1 = ''
+message.1
+!file.exists(SASnatch.R.cache.path)
+SASnatch.R.cache.path
+SASnatch.working.directory=''
+SASnatch.R.cache.path = ''
+getwd()
+!file.exists(SASnatch.SAScache.path)
+SASnatch.SAScache.path
+makeSAScache <- function(SASnatch.working.directory=''){
+if(SASnatch.working.directory != ''){
+message.1 = 'SASnatch.working.directory not set in chunk'
+SASnatch.R.cache.path = SASnatch.working.directory
+if(!is.null(knitr:::opts_current$get('cache.path'))){
+message.1 = 'Setting SASnatch.R.cache.path to knitr cache path'
+SASnatch.R.cache.path = knitr:::opts_current$get('cache.path')
+message.1 = 'Setting SASnatch.R.cache.path to working directory'
+message(message.1)
+SASnatch.R.cache.path = file.path(getwd(),'cache')
+if(grepl('iastate',SASnatch.R.cache.path)){
+SASnatch.R.cache.path = unlist(strsplit(SASnatch.R.cache.path,'/'))
+SASnatch.R.cache.path = paste('U:',paste(SASnatch.R.cache.path[4:length(SASnatch.R.cache.path)],collapse='/'),sep='/')
+SASnatch.R.cache.parent = unlist(strsplit(SASnatch.R.cache.path,'/'))
+SASnatch.R.cache.folder = SASnatch.R.cache.parent[length(SASnatch.R.cache.parent)]
+SASnatch.R.cache.parent = SASnatch.R.cache.parent[1:(length(SASnatch.R.cache.parent)-1)]
+SASnatch.R.cache.parent = paste(SASnatch.R.cache.parent,collapse='/')
+if(!file.exists(SASnatch.R.cache.path)){
+message.2 = paste("Creating folder '",SASnatch.R.cache.folder[1],"' in directory",SASnatch.R.cache.parent,sep='')
+message(message.2)
+dir.create(file.path(SASnatch.R.cache.parent,SASnatch.R.cache.folder))
+SAScache.beside.Rcache = FALSE
+if(SAScache.beside.Rcache){
+SASnatch.SAScache.path <- gsub('cache','SAScache',SASnatch.R.cache.parent)
+}else{
+SASnatch.SAScache.path <- file.path(SASnatch.R.cache.path,'SAScache')
+SASnatch.SAScache.folder <- 'SAScache'
+if(!file.exists(SASnatch.SAScache.path)){
+message.3 = paste("Creating folder 'SAScache' in directory",SASnatch.R.cache.parent)
+message(message.3)
+dir.create(file.path(SASnatch.SAScache.path))
+return(SASnatch.SAScache.path)
+base::source("/tmp/r-plugin-user/Rsource-17571-makeSAScache.r")
+makeSAScache(SASnatch.working.directory=''){
+makeSAScache(SASnatch.working.directory='')
+SASnatch.dsn
+d.1 <- data.frame(x=1:100,y=.3+.2*(1:100)+rnorm(100,0,3),group=rep('A',100))
+d.2 <- data.frame(x=1:100,y=.1+.5*(1:100)+rnorm(100,0,3),group=rep('B',100))
+d <- rbind(d.1,d.2)
+d1 <- data.frame(x=1:100,y=.3+.2*(1:100)+rnorm(100,0,3),group=rep('A',100))
+d2 <- data.frame(x=1:100,y=.1+.5*(1:100)+rnorm(100,0,3),group=rep('B',100))
+d <- rbind(d1,d2)
+chunk.name
+SASnatch.dsn <- c('d1,d2','d')
+chunk.name = 'friends'
+code = 'proc sas; glm sql; run; quit;'
+SAScache.directory <- makeSAScache()
+if(!is.null(knitr:::opts_current$get('SASnatch'))){
+SASnatch.dsn <<- knitr:::opts_current$get('SASnatch')
+if(!is.null(knitr:::opts_current$get('label'))){
+chunk.name = knitr:::opts_current$get('label')
+if(!is.null(knitr:::opts_current$get('code'))){
+code = knitr:::opts_current$get('code')
+code
+R2SAS <<- SASnatch.dsn[1]; SAS2R <<- SASnatch.dsn[2]
+R2SAS
+SAScode <<- createSAScode(SASnatch.working.directory = SAScache.directory,
+SAS2R = SAS2R,
+chunk.name=chunk.name,
+code = code)
+SASfile <<- createSASfile(code=SAScode,
+SAScache.directory=SAScache.directory,
+R.WRITE.code <<- snatchR2SAS(SAScache.directory = SAScache.directory,
+R2SAS = R2SAS,
+chunk.name=chunk.name)
+SASnatch.SASRUN <<- runSASnatch(SAScache.directory=SAScache.directory,
+SASnatch.label=chunk.name)
+SASnatch.SASRUN
+SASRUN = FALSE
+if(SASRUN == TRUE){
+system(SASnatch.SASRUN)
+SASnatch.S4 <<- read.SASnatch.object(chunk.name=chunk.name,SASresults.path=SAScache.directory,SAS2R.names=SAS2R,SAS2R.type='.csv')
+install_github('SASnatch','imouzon',arg='-l U://Documents/R/win-library/3.0')
+base::source("/tmp/r-plugin-user/Rsource-17571-test_SASnatch.rnw")
+system('rm -rf ~/courses/stat585/SASnatch/sandbox/fake_project3')
+require('devtools')
+install_github('SASnatch','imouzon')
+system('rm -rf ~/courses/stat585/SASnatch_examples/fake_project3')
+system('mkdir ~/courses/stat585/SASnatch_examples/fake_project3')
+SAScache.directory <- makeSAScache('~/courses/stat585/SASnatch/sandbox/fake_project3')
+SAScache.directory <- makeSAScache('~/courses/stat585/SASnatch/fake_project3')
+SAScache.directory <- makeSAScache('~/courses/stat585/SASnatch_examples/fake_project3')
+setwd('~/courses/stat585/SASnatch_examples/fake_projects/')
+system('rm -rf ./fake_project3')
+system('mkdir ./fake_project3')
+html.output <- list('this is the first HTML table', 'this is the second HTML table')
+tex.output <- list('this is the first TeX table', 'this is the second TeX table')
+results <- new('snatchResults', HTML = html.output, TeX = tex.output)
+code.file = 'proc reg data = d;'
+library(SASnatch)
+helloSnatch('... hopefully')
+rawhtml.output <- list('Raw HTML output is output coming directly from SAS',
+'These files contain titles and html code that may not be desirable and are stored in the rawHTML slot of the results slot')
+rawtex.output <- list('Raw TeX output is output coming directly from SAS',
+'These files contain titles and latex code that may not be desirable and are stored in the rawTeX slot of the results slot')
+r.output <- list('Using the XML package we can get the tables out of the raw HTML',
+'the slot R in the results slot contains the tables read this way')
+tex.output <- list('Using the xtable package we can write more knitr friendly TeX tables',
+'the TeX slot in the results slot contains the tables written using the xtable packages')
+html.output <- list('Using the xtable package we can write more knitr friendly HTML tables',
+'the HTML slot in the results slot contains the tables written using the xtable packages')
+results <- new('snatchResults',
+rawHTML = rawhtml.output,
+HTML = html.output,
+rawTeX = rawtex.output,
+TeX = tex.output,
+R = r.output)
+code.file = 'code as it is run in SAS'
+d1 <- data.frame(x=1:10,y=1:10)
+d2 <- data.frame(fish=c(rep('bass',5),rep('trout',5)),wts=rexp(10))
+d3 <- data.frame(fish=c(rep('bass',5),rep('trout',5)),wts=rexp(10))
+output2R <- new('snatchOutput',SAS2R=list(d1,d2))
+log.file <- 'this is erros and stuff'
+snatch.Chunk <- new('SASnatch',code = code.file, results = results, out = output2R, log = log.file)
+snatch.Chunk@results@HTML[[2]]
+snatch.Chunk@results@TeX[[2]]
+snatch.Chunk@code
+snatch.Chunk@out
+snatch.Chunk@log
+snatch.Chunk
+snatch.Chunk@results@rawTeX[[2]]
+snatch.Chunk@results@R[[1]]
+snatch.Chunk@results@R[[1]][1]
+printSASnatch(snatch.Chunk)
+printSASnatch(snatch.Chunk,type = 'html')
+printSASnatch(snatch.Chunk,type = 'HTML')
+system('rm -rf ~/courses/stat585/SASnatch_examples/fake_project1')
+system('mkdir ~/courses/stat585/SASnatch_examples/fake_project1')
+system('rm -rf ~/courses/stat585/SASnatch_examples/fake_projects/fake_project1')
+system('mkdir ~/courses/stat585/SASnatch_examples/fake_projects/fake_project1')
+install()
+cat("data salinity;\n   infile 'salinity.txt' firstobs = 2;\n   /* on a pc: \n   infile 'c:/Documents and Settings/pdixon.IASTATE/Desktop/salinity.txt'\n      firstobs =  2;   */\n   input trt $ container plant weight;")@
+cat("data salinity;\n   infile 'salinity.txt' firstobs = 2;\n   /* on a pc: \n   infile 'c:/Documents and Settings/pdixon.IASTATE/Desktop/salinity.txt'\n      firstobs =  2;   */\n   input trt $ container plant weight;")
+?scan
+for(i %in% c(1:3,5:10)){
+for(i in c(1:3,5:10)){
+cat(i)
+}
+rm(list=ls())
+library(devtools)
+setwd('~/courses/stat585/SASnatch')
+document()
+build_vignettes()
+check()
+require('reshape2')
+?melt
+melt(data=turtle,SEX,1:3)
+setwd('~/courses/stat585/SASnatch_examples/turtles')
+d <- read.table('turtles.txt',sep = ' ')
+names(d) <- c('LENGTH','WIDTH','HEIGHT','SEX')
+turtles <- read.table('turtles.txt',sep = ' ')
+names(turtles) <- c('LENGTH','WIDTH','HEIGHT','SEX')
+turtle.melt <- melt(data=turtle,SEX,1:3)
+turtle.melt <- melt(data=turtles,SEX,1:3)
+head(turtle.melt)
+qplot(variable,value,geom='boxplot',color=SEX)
+qplot(variable,value,data=turtle.melt,geom='boxplot',color=SEX)
+turtles$SEX = as.factor(turtles$SEX)
+turtle.melt <- melt(data=turtles,'SEX',1:3)
+qplot(variable,factor(value),data=turtle.melt,geom='boxplot',color=SEX)
+qplot(variable,factor(value),data=turtle.melt,geom='boxplot',color=as.factor(SEX))
+qplot(variable,factor(value),data=turtle.melt,geom='boxplot')
+qplot(variable,value,data=turtle.melt,geom='boxplot')
+qplot(variable,value,data=turtle.melt,geom='boxplot',fill=SEX)

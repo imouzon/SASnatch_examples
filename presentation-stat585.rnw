@@ -1,0 +1,156 @@
+% For LaTeX-Box: root = presentation-stat585.tex 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  File Name: presentation-stat585.rnw
+%  Purpose:
+%
+%  Creation Date: 29-04-2014
+%  Last Modified: Wed Apr 30 13:42:17 2014
+%  Created By:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-- Set parent file
+<<set-parent, echo=FALSE, cache=FALSE, include = TRUE>>=
+   #set up knitr
+   source('knitr-presentation-setup.r')
+   knitrSetup(rootDir=FALSE,use.tikz=TRUE)
+
+   #set up file locations
+   file.directory = getwd()
+   setwd(file.directory)
+   set_parent('main-585presentation-document.rnw')
+@
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{What is SAS}
+\framesubtitle{And why should you care}
+\centerline{\includegraphics[scale=.4]{/Users/user/Desktop/SASis}} \\
+
+\textbf{Multiple Choice:}
+SAS is one of the following
+\begin{itemize}
+   \item[(a)] 
+      SAS is a software suite developed by SAS institute for advanced analytics
+   \item[(b)] 
+      A frustrating and cumbersome tool that has been losing 
+      its place in academia and increasingly in industry and which will not be
+      missed when it disappears forever
+   \item[(c)]
+      A programming language that you will have to use in one or two classes
+      but then all your professors after that will use R
+   \item[(d)]
+      All of the above
+\end{itemize}
+\pause The answer is (a). The other choices are all incorrect.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SAS: It's actually really good}
+   \framesubtitle{It's better than you remember}
+   \begin{itemize}
+      \item SAS code that works now will still work years from now and SAS
+         code that ran years ago will still run today 
+         \vspace{.2cm}
+
+      \item SAS is very well documented (something that matters 
+            more as you move away from STAT 500 material),
+         \vspace{.2cm}
+
+         \item \textbf{Three of the big topics from this class}
+            \begin{itemize}
+               \item SAS has interactive graphics, \\
+               \item built in tools for \textit{static or dynamic} web publishing, \\
+               \item built in database management methods 
+            \end{itemize}
+         \vspace{.2cm}
+
+         \item SAS runs of linux
+   \end{itemize}
+\end{frame}
+
+%at this point do a simple example showing how to
+%do an analysis in SAS
+\begin{frame}[fragile]
+   \frametitle{Example: Principle components}
+   \begin{verbatim}
+      OPTIONS LS=80;
+      DATA TURTLES;
+         INFILE "/home/dicook/data/johnson.and.wichern/turtles.dat";
+         INPUT LENGTH WIDTH HEIGHT SEX;
+      PROC PRINCOMP COV OUT=PCA1;
+      VAR LENGTH WIDTH HEIGHT;
+      PROC PLOT DATA=PCA1;
+      PLOT PRIN2*PRIN1;
+      PLOT PRIN3*PRIN1;
+      PLOT PRIN3*PRIN2;
+      RUN;
+   \end{verbatim}
+\end{frame}
+
+\begin{frame}
+   \frametitle{A few problems you may have just noticed}
+   \framesubtitle{Or noticed over and over again in STAT 500}
+   \begin{itemize}
+      \item There is too much output.
+      \begin{itemize}
+         \item SAS seems to err on the side of caution and gives us more than we usually need.
+      \end{itemize}
+      \item The plots are underwhelming
+      \begin{itemize}
+         \item SAS can create very high quality plots but these don't seem to be
+         \item We can always export the data sets so that we can make our plots in R, but this would be an enormous amount of trouble
+      \end{itemize}
+      \pause
+      \item The output does not allow us to make changes.
+      \begin{itemize}
+         \item We can dig into the html file produced in the second example
+            but this is a far cry from the ease of using knitr
+      \end{itemize}
+   \end{itemize}
+   Most of my complaints about SAS have to do with the way it fails to work like knitr.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SASnatch: Using SAS in a more natural way}
+
+   SASnatch is a package that aims to do more the following:
+   \begin{itemize}
+      \item Bridge the gap between SAS code and reproducible, manipulatable output
+      \item Allow the programmer to use which tool they prefer at that moment, be
+         it is SAS or R
+   \end{itemize}
+
+   It does this through knitr. I will show you how this works.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SASnatch: Using SAS in a more natural way}
+
+   SASnatch is a package that aims to do more the following:
+   \begin{itemize}
+      \item Bridge the gap between SAS code and reproducible, manipulatable output
+      \item Allow the programmer to use which tool they prefer at that moment, be
+         it is SAS or R
+   \end{itemize}
+
+   It does this through knitr. I will show you how this works.
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Installation}
+
+   SASnatch is available on github at: \vspace{.3cm}
+
+   \verb! https://github.com/imouzon/SASnatch! \vspace{.4cm} \\
+
+   \begin{itemize}
+      \item in R it can be installed on \verb!ts3! using 
+   \end{itemize}
+   \verb!    >library(devtools)!
+   \verb!    >install_github('SASnatch','imouzon',!
+   \verb!                    arg='-l U://Documents/R/win-library/3.0')!
+   \vspace{.4cm} \\
+
+\end{frame}

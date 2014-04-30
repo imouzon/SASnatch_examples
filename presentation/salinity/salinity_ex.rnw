@@ -1,0 +1,92 @@
+%-- SASnatch and mixed models
+\documentclass[10pt]{article}
+\usepackage{longtable}
+\newcommand{\sascontents}[2][]{%
+   \centerline{\textbf{#2}}}
+%\usepackage{./cache/SAScache/sas}
+\begin{document}
+\section{Using SASnatch with mixed models}
+\section{Setting up SASnatch}
+When using knitr and SASnatch we must set a hook function (and thus we must load
+the knitr package, though if we are not planning to use the chunk options \verb!SASnatch!
+and instead use inline \verb!snatchSAS! then we can get by without loading the knitr package
+(but honestly, this package only exists because of knitr, so there is not much point 
+in doing that).
+<<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
+   require('knitr')
+   require('SASnatch')
+   require('ggplot2')
+@
+These are the options you MUST set for SASnatch to work. One day this may not be the case.
+First, to execute SAS from the command line (which is what SASnatch does) 
+you must (\textit{at this point}) set the path manually:
+<<SASnatch-settings-1, cache=FALSE, message=FALSE, include = TRUE>>=
+   whrsas= "\"C:/Program Files/SASHome/SASFoundation/9.3/sas.exe\""
+   path_to_SAS.EXE = whrsas
+@
+and secondly you must set set the hook function:
+<<SASnatch-settings-0, cache=FALSE, message=FALSE, include = TRUE>>=
+   knit_hooks$set(SASnatch = SASnatch_hook)
+@
+At this point you are ready to use SASnatch.
+
+\section{SASnatch and mixed models}
+\subsection{Getting the data}
+There is an example of using plan a mixed model on Dr. Dixon's STAT 402A webpage:
+%-- dixonsPage: R code (Code in Document)
+<<dixonsPage, echo=FALSE, cache=TRUE, include = TRUE>>=
+cat('http://www.public.iastate.edu/~pdixon/stat402/')
+@
+We can already see that there is some advantage to suing SASnatch in the 
+way that data is read into the program. While SAS can read data from webpages, I
+have never had a class where the method was even mentioned, and I suppose that 
+most students in upper level statistics courses could be unaware of this ability.
+However, reading R from a webpage is both simple to do and ensures that the data step can 
+be written generally. Thus we replace the SAS code:
+%-- chunk1: R code (Code in Document)
+<<chunk1, echo=FALSE, cache=TRUE, comment=NA, include = TRUE>>=
+   cat("data salinity;\n   infile 'salinity.txt' firstobs = 2;\n   /* on a pc: \n   infile 'C:/data/salinity.txt'\n      firstobs =  2;   */\n   input trt $ container plant weight;")
+@
+with much more simplistic:
+%-- readSalinity: R code (Code in Document)
+<<readSalinity, echo=TRUE, cache=TRUE, include = TRUE>>=
+   salinity <- read.table('http://www.public.iastate.edu/~pdixon/stat402/data/salinity.txt',header=TRUE)
+@
+No need to save the file and we will still be able to use SAS.
+
+To describe the data, we may want to create some simple plots. Since there is no 
+situation I can thing of where a SAS plot is preferable to an R plot, we
+replace
+%-- SASplots-GROSS: R code (Code in Document)
+<<SASplots-GROSS, echo=FALSE, comment=NA, cache=TRUE, include = TRUE>>=
+   cat("proc plot; \n plot weight*container = trt; \n title 'Barley response to salinity';")
+@
+with
+%-- procPlot: R plot (results in document)
+<<procPlot, fig.width=5, fig.height=5, echo=TRUE>>=
+   qplot(trt,weight,color=factor(container),data=salinity,main='Barley response to salinity')
+@
+We would now like to fix a mixed model with container as a random effect. This 
+could be done using SAS. Since we want to get output back from SASnatch, we need to 
+add an output statement:
+%-- SASmixed: R code (Code in Document)
+<<SASmixed, SASnatch = c('salinity',''), eval=FALSE, echo=FALSE, cache=FALSE, include = TRUE>>=
+   proc mixed method = type3 data = salinity; 
+     class trt container; 
+     model weight = trt; 
+     random container(trt); 
+     lsmeans trt; 
+   run;
+@
+
+%-- WHAT A CHEAT! THIS ISNT HOW WE DO!
+<<SASmixedcode, echo=FALSE, comment=NA, include = TRUE>>=
+   catSnatch(SASmixed.snatch)
+@
+which gives us the following:
+%-- Rmixed: R code (Code in Document)
+
+<<Rmixed, results='asis',echo=TRUE, cache=TRUE, include = TRUE>>=
+   printSASnatch(SASmixed.snatch,type='TeX')
+@
+\end{document}

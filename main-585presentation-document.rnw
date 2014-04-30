@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  File Name: 651pres.tex
+%  Purpose:
+%
+%  Creation Date: 08-12-2012
+%  Last Modified: Tue Apr 29 20:40:59 2014
+%  Created By:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  To start a homework: :r ~/TeX/hwtemplate.tex
+\documentclass[xcolor=dvipsnames,gray,mathserif]{beamer}
+%[xcolor=dvipsnames]
+%\usetheme{default}
+%\usetheme{default}
+%\usetheme{Madrid}
+\usetheme{Boadilla}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{epsfig}
+%\usepackage{pdfpages}
+\usepackage{amsmath,amssymb} % \fleqn if taken out math environments will get centered
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\documentclass[11pt,red]{beamer}
+
+%\usepackage{inc/inc}
+\usepackage{amsmath,amssymb,amsfonts,dsfont,amscd}
+\usepackage{graphicx,bm,booktabs,subfigure}
+
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage[vcentermath]{youngtab}
+
+\usepackage{multirow}
+\usepackage{epsfig}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsgen}
+\usepackage{amsxtra}
+\usepackage{amsgen}
+\usepackage{amsthm}
+\usepackage{color}
+
+\usepackage{chemarr}
+\usepackage[mathscr]{eucal}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage{booktabs}
+
+\newcommand{\M}{\operatorname{M}}
+\newcommand{\mr}{\operatorname{mr}}
+
+% notation related to skew min rank
+\newcommand{\s}{\mathcal{S}}
+\newcommand{\sS}{\mathcal{S}^-}
+\newcommand{\smr}{\operatorname{mr}^-}
+\newcommand{\sMR}{\operatorname{MR}^-}
+\newcommand{\sM}{\operatorname{M}^-}
+\newcommand{\sZ}{\operatorname{Z}^-}
+\newcommand{\srv}{\operatorname{r}_v^-}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\R}{\mathbb{R}}
+
+%blue red
+\definecolor{myBlue}{rgb}{0.1,0.1,0.45098039}
+\def\Head#1{\noindent{\color{myBlue} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\normal}{\mathcal{N}}
+\setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%    FANCY QUOTES                                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter
+%\tikzset{%
+%  fancy quotes/.style={
+%    text width=\fq@width pt,
+%    align=justify,
+%    inner sep=1em,
+%    anchor=north west,
+%    minimum width=\textwidth,
+%  },
+%  fancy quotes width/.initial={.8\textwidth},
+%  fancy quotes marks/.style={
+%    scale=8,
+%    text=white,
+%    inner sep=0pt,
+%  },
+%  fancy quotes opening/.style={
+%    fancy quotes marks,
+%  },
+%  fancy quotes closing/.style={
+%    fancy quotes marks,
+%  },
+%  fancy quotes background/.style={
+%    show background rectangle,
+%    inner frame xsep=0pt,
+%    background rectangle/.style={
+%      fill=gray!25,
+%      rounded corners,
+%    },
+%  }
+%}
+%
+%\newenvironment{fancyquotes}[1][]{%
+%\noindent
+%\tikzpicture[fancy quotes background]
+%\node[fancy quotes opening,anchor=north west] (fq@ul) at (0,0) {``};
+%\tikz@scan@one@point\pgfutil@firstofone(fq@ul.east)
+%\pgfmathsetmacro{\fq@width}{\textwidth - 2*\pgf@x}
+%\node[fancy quotes,#1] (fq@txt) at (fq@ul.north west) \bgroup}
+%{\egroup;
+%\node[overlay,fancy quotes closing,anchor=east] at (fq@txt.south east) {''};
+%\endtikzpicture}
+%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  End of fancy quotes                                %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%title information
+\title[SASnatch]{SASnatch: Using SAS Naturally}
+\subtitle{(or knitrally)}
+\subtitle{\smaller{(or snatchurally)}}
+\author[Mouzon]{Ian Mouzon}
+\institute[Stats@ISU]{Department of Statistics\\Iowa State University }
+\date[Apr 30, 2014]{April 30, 2014}
+
+\begin{document}
+
+
+\end{document}

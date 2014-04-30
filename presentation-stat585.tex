@@ -1,0 +1,328 @@
+
+\documentclass[xcolor=dvipsnames,gray,mathserif]{beamer}
+\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+%[xcolor=dvipsnames]
+%\usetheme{default}
+%\usetheme{default}
+%\usetheme{Madrid}
+\usetheme{Boadilla}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{epsfig}
+%\usepackage{pdfpages}
+\usepackage{amsmath,amssymb} % \fleqn if taken out math environments will get centered
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\documentclass[11pt,red]{beamer}
+
+%\usepackage{inc/inc}
+\usepackage{amsmath,amssymb,amsfonts,dsfont,amscd}
+\usepackage{graphicx,bm,booktabs,subfigure}
+
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage[vcentermath]{youngtab}
+
+\usepackage{multirow}
+\usepackage{epsfig}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsgen}
+\usepackage{amsxtra}
+\usepackage{amsgen}
+\usepackage{amsthm}
+\usepackage{color}
+
+\usepackage{chemarr}
+\usepackage[mathscr]{eucal}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage{booktabs}
+
+\newcommand{\M}{\operatorname{M}}
+\newcommand{\mr}{\operatorname{mr}}
+
+% notation related to skew min rank
+\newcommand{\s}{\mathcal{S}}
+\newcommand{\sS}{\mathcal{S}^-}
+\newcommand{\smr}{\operatorname{mr}^-}
+\newcommand{\sMR}{\operatorname{MR}^-}
+\newcommand{\sM}{\operatorname{M}^-}
+\newcommand{\sZ}{\operatorname{Z}^-}
+\newcommand{\srv}{\operatorname{r}_v^-}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\R}{\mathbb{R}}
+
+%blue red
+\definecolor{myBlue}{rgb}{0.1,0.1,0.45098039}
+\def\Head#1{\noindent{\color{myBlue} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\normal}{\mathcal{N}}
+\setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%    FANCY QUOTES                                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter
+%\tikzset{%
+%  fancy quotes/.style={
+%    text width=\fq@width pt,
+%    align=justify,
+%    inner sep=1em,
+%    anchor=north west,
+%    minimum width=\textwidth,
+%  },
+%  fancy quotes width/.initial={.8\textwidth},
+%  fancy quotes marks/.style={
+%    scale=8,
+%    text=white,
+%    inner sep=0pt,
+%  },
+%  fancy quotes opening/.style={
+%    fancy quotes marks,
+%  },
+%  fancy quotes closing/.style={
+%    fancy quotes marks,
+%  },
+%  fancy quotes background/.style={
+%    show background rectangle,
+%    inner frame xsep=0pt,
+%    background rectangle/.style={
+%      fill=gray!25,
+%      rounded corners,
+%    },
+%  }
+%}
+%
+%\newenvironment{fancyquotes}[1][]{%
+%\noindent
+%\tikzpicture[fancy quotes background]
+%\node[fancy quotes opening,anchor=north west] (fq@ul) at (0,0) {``};
+%\tikz@scan@one@point\pgfutil@firstofone(fq@ul.east)
+%\pgfmathsetmacro{\fq@width}{\textwidth - 2*\pgf@x}
+%\node[fancy quotes,#1] (fq@txt) at (fq@ul.north west) \bgroup}
+%{\egroup;
+%\node[overlay,fancy quotes closing,anchor=east] at (fq@txt.south east) {''};
+%\endtikzpicture}
+%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  End of fancy quotes                                %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%title information
+\title[SASnatch]{SASnatch: Using SAS Naturally}
+\subtitle{(or knitrally)}
+\subtitle{\smaller{(or snatchurally)}}
+\author[Mouzon]{Ian Mouzon}
+\institute[Stats@ISU]{Department of Statistics\\Iowa State University }
+\date[Apr 30, 2014]{April 30, 2014}
+
+
+
+\begin{document}
+% For LaTeX-Box: root = presentation-stat585.tex 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  File Name: presentation-stat585.rnw
+%  Purpose:
+%
+%  Creation Date: 29-04-2014
+%  Last Modified: Wed Apr 30 13:41:33 2014
+%  Created By:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-- Set parent file
+
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{What is SAS}
+\framesubtitle{And why should you care}
+\centerline{\includegraphics[scale=.4]{/Users/user/Desktop/SASis}} \\
+
+\textbf{Multiple Choice:}
+SAS is one of the following
+\begin{itemize}
+   \item[(a)] 
+      SAS is a software suite developed by SAS institute for advanced analytics
+   \item[(b)] 
+      A frustrating and cumbersome tool that has been losing 
+      its place in academia and increasingly in industry and which will not be
+      missed when it disappears forever
+   \item[(c)]
+      A programming language that you will have to use in one or two classes
+      but then all your professors after that will use R
+   \item[(d)]
+      All of the above
+\end{itemize}
+\pause The answer is (a). The other choices are all incorrect.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SAS: It's actually really good}
+   \framesubtitle{It's better than you remember}
+   \begin{itemize}
+      \item SAS code that works now will still work years from now and SAS
+         code that ran years ago will still run today 
+         \vspace{.2cm}
+
+      \item SAS is very well documented (something that matters 
+            more as you move away from STAT 500 material),
+         \vspace{.2cm}
+
+         \item \textbf{Three of the big topics from this class}
+            \begin{itemize}
+               \item SAS has interactive graphics, \\
+               \item built in tools for \textit{static or dynamic} web publishing, \\
+               \item built in database management methods 
+            \end{itemize}
+         \vspace{.2cm}
+
+         \item SAS runs of linux
+   \end{itemize}
+\end{frame}
+
+%at this point do a simple example showing how to
+%do an analysis in SAS
+\begin{frame}[fragile]
+   \frametitle{Example: Principle components}
+   \begin{verbatim}
+      OPTIONS LS=80;
+      DATA TURTLES;
+         INFILE "/home/dicook/data/johnson.and.wichern/turtles.dat";
+         INPUT LENGTH WIDTH HEIGHT SEX;
+      PROC PRINCOMP COV OUT=PCA1;
+      VAR LENGTH WIDTH HEIGHT;
+      PROC PLOT DATA=PCA1;
+      PLOT PRIN2*PRIN1;
+      PLOT PRIN3*PRIN1;
+      PLOT PRIN3*PRIN2;
+      RUN;
+   \end{verbatim}
+\end{frame}
+
+\begin{frame}
+   \frametitle{A few problems you may have just noticed}
+   \framesubtitle{Or noticed over and over again in STAT 500}
+   \begin{itemize}
+      \item There is too much output.
+      \begin{itemize}
+         \item SAS seems to err on the side of caution and gives us more than we usually need.
+      \end{itemize}
+      \item The plots are underwhelming
+      \begin{itemize}
+         \item SAS can create very high quality plots but these don't seem to be
+         \item We can always export the data sets so that we can make our plots in R, but this would be an enormous amount of trouble
+      \end{itemize}
+      \pause
+      \item The output does not allow us to make changes.
+      \begin{itemize}
+         \item We can dig into the html file produced in the second example
+            but this is a far cry from the ease of using knitr
+      \end{itemize}
+   \end{itemize}
+   Most of my complaints about SAS have to do with the way it fails to work like knitr.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SASnatch: Using SAS in a more natural way}
+
+   SASnatch is a package that aims to do more the following:
+   \begin{itemize}
+      \item Bridge the gap between SAS code and reproducible, manipulatable output
+      \item Allow the programmer to use which tool they prefer at that moment, be
+         it is SAS or R
+   \end{itemize}
+
+   It does this through knitr. I will show you how this works.
+\end{frame}
+
+\begin{frame}
+   \frametitle{SASnatch: Using SAS in a more natural way}
+
+   SASnatch is a package that aims to do more the following:
+   \begin{itemize}
+      \item Bridge the gap between SAS code and reproducible, manipulatable output
+      \item Allow the programmer to use which tool they prefer at that moment, be
+         it is SAS or R
+   \end{itemize}
+
+   It does this through knitr. I will show you how this works.
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Installation}
+
+   SASnatch is available on github at: \vspace{.3cm}
+
+   \verb! https://github.com/imouzon/SASnatch! \vspace{.4cm} \\
+
+   \begin{itemize}
+      \item in R it can be installed on \verb!ts3! using 
+   \end{itemize}
+   \verb!    >library(devtools)!
+   \verb!    >install_github('SASnatch','imouzon',!
+   \verb!                    arg='-l U://Documents/R/win-library/3.0')!
+   \vspace{.4cm} \\
+
+\end{frame}
+\end{document}

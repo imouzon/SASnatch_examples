@@ -3,7 +3,7 @@
 %  Purpose: Provide a simple illustration of SASnatch
 %
 %  Creation Date: 25-04-2014
-%  Last Modified: Tue Apr 29 10:57:18 2014
+%  Last Modified: Wed Apr 30 01:18:23 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[10pt]{article}
@@ -23,6 +23,7 @@ SASnatch requires knitr to run
 <<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
    require('SASnatch')
    require('ggplot2')
+   require('reshape2')
 @
 and the following set in any chunk before the first SASnatch chunk:
 <<SASnatchsettings, cache=FALSE, message=FALSE, include = TRUE>>=

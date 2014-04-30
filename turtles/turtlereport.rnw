@@ -1,0 +1,66 @@
+%-- title page and quote
+%\titleheader{}Sexpr{source('~/R/randomTeXquote.r'); randomTeXquote}
+\documentclass{article}
+\usepackage{longtable}
+
+\begin{document}
+\centerline{\Large{Homework 3: Turtles}}
+\centerline{\large{HERP 501: Turtle Analysis}}
+
+\section{Pre-ramble}
+%-- packages: R code (Code in Document)
+<<packages, echo=FALSE, cache=FALSE, include = TRUE, warning = FALSE, message = FALSE>>=
+   library(knitr)
+   library(SASnatch)
+   require('ggplot2')
+   require('reshape2')
+
+   #set working directory
+   setwd('U:/Desktop/presentation/SASnatch')
+
+   #where is SAS on this computer
+   path_to_SAS.EXE = "\"C:/Program Files/SASHome/SASFoundation/9.3/sas.exe\""
+
+   #create hook function
+   knit_hooks$set(SASnatch = SASnatch_hook)
+@
+It is often the job of a good herpetologist to 
+not just where turtles stand (or rather lay) 
+but how much space they take up laying there.
+We can use principle components to reduce
+time consuming measurements of all the turtle
+parts to maybe just a few measurements.
+Hopefully we can avoid problems of sex,
+as responsible herpetologists make a priority.
+
+\section{The data}
+%-- Name: R code (Code in Document)
+<<readData, echo=FALSE, cache=TRUE, include = TRUE>>=
+   turtles <- read.table('../SASalone/turtles.txt',sep = ' ')
+   names(turtles) <- c('LENGTH','WIDTH','HEIGHT','SEX')
+   turtles$SEX = as.factor(turtles$SEX)
+@
+We have lots of data these turtles, which is about
+the best thing one could ask for. 
+We can summarize it with the following boxplots
+
+%-- Name: R figure (code in document - set include=FALSE to remove)
+\Sexpr{fig.cap = 'Box plots each variable by sex'}
+<<figure1, fig.width=5, fig.height=5, out.width='.5\\maxwidth', fig.cap=fig.cap, echo=TRUE>>=
+   turtle.melt <- melt(data=turtles,'SEX',1:3)
+   qplot(variable,value,data=turtle.melt,geom='boxplot',fill=SEX)
+@
+It looks like \verb!SEX = 2! turtles are probably smaller, but no 
+frightening shape chages are aparent.
+
+\section{Using SAS}
+%-- pcaSAS: R code (Code in Document)
+<<pcaSAS, SASnatch = c('turtles','turtlesPCA'),echo=FALSE, eval=FALSE, cache=FALSE, include = TRUE>>=
+      PROC PRINCOMP COV DATA = TURTLES OUT=PCA1; VAR LENGTH WIDTH HEIGHT; RUN;
+@
+Running a PCA on the turtles using SAS we can see the following basic results
+%-- pcaRes: R code (Code in Document)
+<<pcaRes, echo=FALSE, cache=FALSE, message = FALSE, warning = FALSE, include = TRUE, results = 'asis'>>=
+   pcaSAS.snatch
+@
+\end{document}
