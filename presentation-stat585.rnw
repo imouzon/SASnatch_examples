@@ -4,7 +4,7 @@
 %  Purpose:
 %
 %  Creation Date: 29-04-2014
-%  Last Modified: Wed Apr 30 14:39:10 2014
+%  Last Modified: Wed Apr 30 15:17:27 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-- Set parent file
@@ -76,16 +76,17 @@ SAS is one of the following
 \begin{frame}[fragile]
    \frametitle{Example: Principle components}
    \begin{verbatim}
-      OPTIONS LS=80;
       DATA TURTLES;
-         INFILE "/home/dicook/data/johnson.and.wichern/turtles.dat";
+         INFILE "./turtles.dat";
          INPUT LENGTH WIDTH HEIGHT SEX;
+
       PROC PRINCOMP COV OUT=PCA1;
-      VAR LENGTH WIDTH HEIGHT;
+         VAR LENGTH WIDTH HEIGHT;
+
       PROC PLOT DATA=PCA1;
-      PLOT PRIN2*PRIN1;
-      PLOT PRIN3*PRIN1;
-      PLOT PRIN3*PRIN2;
+         PLOT PRIN2*PRIN1;
+         PLOT PRIN3*PRIN1;
+         PLOT PRIN3*PRIN2;
       RUN;
    \end{verbatim}
 \end{frame}
@@ -116,15 +117,9 @@ SAS is one of the following
 \begin{frame}[fragile]
    \frametitle{SASnatch: Using SAS in a more natural way}
 
-   SASnatch is a package that aims to do more the following:
-   \begin{itemize}
-      \item Bridge the gap between SAS code and reproducible, manipulatable output \\
+   \centerline{\includegraphics[scale=.5]{sasnatchlogo1.png}} \\
+   \centerline{\includegraphics[scale=.5]{sasnatchlogo2.png}}
 
-      \item Allow the programmer to use which tool they prefer at that moment, be
-         it is SAS or R
-   \end{itemize}
-
-   It does this through \verb!knitr!. I will show you how this works.
 \end{frame}
 
 \begin{frame}
