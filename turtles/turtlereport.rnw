@@ -7,7 +7,8 @@
 \centerline{\Large{Homework 3: Turtles}}
 \centerline{\large{HERP 501: Turtle Analysis}}
 
-\section{Pre-ramble}
+\centerline{\includegraphics[scale = .12]{turtle}}
+\section{Introduction}
 %-- packages: R code (Code in Document)
 <<packages, echo=FALSE, cache=FALSE, include = TRUE, warning = FALSE, message = FALSE>>=
    library(knitr)
@@ -46,7 +47,7 @@ We can summarize it with the following boxplots
 
 %-- Name: R figure (code in document - set include=FALSE to remove)
 \Sexpr{fig.cap = 'Box plots each variable by sex'}
-<<figure1, fig.width=5, fig.height=5, out.width='.5\\maxwidth', fig.cap=fig.cap, echo=TRUE>>=
+<<figure1, fig.width=8, fig.height=4, out.width='.9\\maxwidth', fig.cap=fig.cap, fig.pos = 'h', echo=FALSE>>=
    turtle.melt <- melt(data=turtles,'SEX',1:3)
    qplot(variable,value,data=turtle.melt,geom='boxplot',fill=SEX)
 @
@@ -56,11 +57,32 @@ frightening shape chages are aparent.
 \section{Using SAS}
 %-- pcaSAS: R code (Code in Document)
 <<pcaSAS, SASnatch = c('turtles','turtlesPCA'),echo=FALSE, eval=FALSE, cache=FALSE, include = TRUE>>=
-      PROC PRINCOMP COV DATA = TURTLES OUT=PCA1; VAR LENGTH WIDTH HEIGHT; RUN;
+      PROC PRINCOMP COV DATA = TURTLES OUT=turtlesPCA; VAR LENGTH WIDTH HEIGHT; RUN;
 @
 Running a PCA on the turtles using SAS we can see the following basic results
 %-- pcaRes: R code (Code in Document)
 <<pcaRes, echo=FALSE, cache=FALSE, message = FALSE, warning = FALSE, include = TRUE, results = 'asis'>>=
-   pcaSAS.snatch
+   printSASnatch(pcaSAS.snatch,type = 'TeX')
 @
+
+
+\Sexpr{fig.cap = 'Scree plot from turtle PCA'}
+<<pscreeplots, fig.width=8, fig.height=4, out.width='.9\\maxwidth', fig.pos = 'h', fig.cap=fig.cap, echo=FALSE>>=
+   rank = 1:nrow(pcaSAS.snatch@results@R[[5]][[1]])
+   eigenval = as.numeric(as.character(pcaSAS.snatch@results@R[[5]][[1]]$Eigenvalue))
+   ggplot2:::qplot(rank,eigenval,geom='line')
+@
+
+We can see from the scree plot that one principle component is likely sufficient for
+summarizing the data:
+
+We can plot the principal components for male and female turtles:
+%-- pcplots: R figure (code in document - set include=FALSE to remove)
+\Sexpr{fig.cap = 'Principle components by turtle sex'}
+<<pcplots, fig.width=8, fig.height=4, out.width='.9\\maxwidth', fig.pos = 'h', fig.cap=fig.cap, echo=FALSE>>=
+   ggplot2:::qplot(Prin1,Prin2,data=pcaSAS.snatch@out@SAS2R[[1]],facets=.~SEX)
+   ggplot2:::qplot(Prin1,Prin3,data=pcaSAS.snatch@out@SAS2R[[1]],facets=.~SEX)
+   ggplot2:::qplot(Prin2,Prin3,data=pcaSAS.snatch@out@SAS2R[[1]],facets=.~SEX)
+@
+
 \end{document}
