@@ -3,7 +3,7 @@
 %  Purpose: Provide a simple illustration of SASnatch
 %
 %  Creation Date: 25-04-2014
-%  Last Modified: Fri May  2 15:11:36 2014
+%  Last Modified: Fri May  2 15:13:00 2014
 %  Created By:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[10pt]{article}
@@ -21,9 +21,9 @@ SASnatch is available on github and can be installed using the \verb!devtools! i
 \subsection{Setting up a .rnw file}
 SASnatch requires knitr to run
 <<require-packages, cache=FALSE, message=FALSE, include = TRUE>>=
+   require('knitr')
    require('SASnatch')
    require('ggplot2')
-   require('reshape2')
 @
 and the following set in any chunk before the first SASnatch chunk:
 <<SASnatchsettings, cache=FALSE, message=FALSE, include = TRUE>>=
@@ -44,7 +44,6 @@ Consider the following dataset:
 We can plot these datasets simply enough:
 -- plotchunk: R plot (results in document)
 <<plotchunk, fig.width=5, fig.height=5, out.width='.5\\maxwidth', echo=TRUE>>=
-   require(ggplot2)
    qplot(x,y,data = d,shape=group)
 @
 
