@@ -31,13 +31,13 @@ but how much space they take up laying there.
 We can use principle components to reduce
 time consuming measurements of all the turtle
 parts to maybe just a few measurements.
-Hopefully we can avoid problems of sex,
+Hopefully we can avoid any complications related to sex,
 as responsible herpetologists make a priority.
 
 \section{The data}
 %-- Name: R code (Code in Document)
 <<readData, echo=FALSE, cache=TRUE, include = TRUE>>=
-   turtles <- read.table('../SASalone/turtles.txt',sep = ' ')
+   turtles <- read.table('../data/turtles.txt',sep = ' ')
    names(turtles) <- c('LENGTH','WIDTH','HEIGHT','SEX')
    turtles$SEX = as.factor(turtles$SEX)
 @
